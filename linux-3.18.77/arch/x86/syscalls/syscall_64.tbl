@@ -187,7 +187,7 @@
 178	64	query_module
 179	common	quotactl		sys_quotactl
 180	64	nfsservctl
-181	common	getpmsg
+181	common	prinfo          sys_prinfo
 182	common	putpmsg
 183	common	afs_syscall
 184	common	tuxcall

@@ -1,30 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "prinfo.h"
 
-#include <linux/unistd.h>
-#include <sys/syscall.h>
+int main (int argc, char ** argv) {
+	struct prinfo p={0};//initialize struct to zero
+	const struct prinfo empty={0};
 
-/*
- * Function: main()
- *
- * Description:
- *   Entry point for this program.
- *
- * Inputs:
- *   argc - The number of argument with which this program was executed.
- *   argv - Array of pointers to strings containing the command-line arguments. 
- *
- * Return value:
- *   0 - This program terminated normally.
- */
-int
-main (int argc, char ** argv) {
-	/* Print a friendly message */
-	printf ("Hello from User Space!\n");
-
-	/* Call our new system call */
-	syscall (181, NULL);
-
-	/* Exit the program */
+	printf("please input the pid:\n");
+	while(scanf("%d",&p.pid) != EOF ){
+		if(syscall(181,&p)<0){
+			printf("syscall error, pleae try again:\n");
+			continue;
+		}
+		/* print the result information */
+		show_result(&p);
+		p=empty;
+	};
 	return 0;
 }
